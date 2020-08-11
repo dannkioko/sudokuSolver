@@ -41,24 +41,39 @@ def createSudoku():
             while j<3:
                 i=0
                 while i<3:
-                    num[j][i] = tk.StringVar()
-                    num_in = ttk.Entry(minFrame, width=5, textvariable=num[j][i])
+                    box[j][i] = tk.StringVar()
+                    num_in = ttk.Entry(minFrame, width=5, textvariable=box[j][i])
                     num_in.grid(column=i,row=j)
                     i=i+1
                 j=j+1
-            nums.append(num)
+            nums.append(box)
             y=y+1
         x=x+1
 def setValues():
     pass    
 
 def click():
-    for i in nums:
-        for j in i:
-            for k in j:
-                print(k.get(), end="")
-        print()
-
+    k=[]
+    x=0
+    for i in range(9):
+        if (i==0 or i==3 or i==6):
+            for j in range(3):
+                k.append(nums[i][j])
+        if (i==1 or i ==2):
+            for j in range(3):
+                for m in range(3):
+                    k[j].append(nums[i][j][m])
+        if (i==4 or i==5):
+            for j in range(3):
+                for m in range(3):
+                    k[j+3].append(nums[i][j][m])
+        if  (i==7 or i ==8):
+            for j in range(3):
+                for m in range(3):
+                    k[j+6].append(nums[i][j][m])
+    for i in k:
+        for a in i: 
+            print(a.get())
 frame = ttk.LabelFrame(win, text="Sudoku")
 frame.grid(column=0, row=0)
 createSudoku()
