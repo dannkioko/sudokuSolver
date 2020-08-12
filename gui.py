@@ -4,28 +4,6 @@ from tkinter import ttk
 win = tk.Tk()
 win.title("Sudoku solver")
 
-# a_label = ttk.Label(win, text="A sudoku solver algorithm").grid(column=10, row = 10)
-
-# def click():
-#     a_button.configure(text="Clicked")
-#     a_button.configure(foreground='red')
-#     a_label.configure(text="Sudoku")
-
-# a_button = ttk.Button(win, text="Click me", command=click).grid(column=10,row=0)
-
-# win.mainloop()
-# a_label = ttk.Label(win, text="A label")
-# a_label.grid(column=0, row=0)
-
-# def click():
-#     action.configure(text="Clicked")
-#     a_label.configure(foreground='red')
-#     a_label.configure(text="Sudoku")
-
-# action = ttk.Button(win, text="Click me", command=click)
-# action.grid(column=1, row=0)
-
-# win.mainloop()
 nums = []
 def createSudoku():
     x=0
@@ -73,7 +51,10 @@ def click():
                     k[j+6].append(nums[i][j][m])
     for i in k:
         for a in i: 
-            print(a.get())
+            print(a.get(), end="")
+        print()
+
+
 frame = ttk.LabelFrame(win, text="Sudoku")
 frame.grid(column=0, row=0)
 createSudoku()
