@@ -1,73 +1,3 @@
-import tkinter as tk
-from tkinter import ttk
-
-
-nums=[]
-def createGUI():
-	win = tk.Tk()
-	win.title("Sudoku solver")
-	frame = ttk.LabelFrame(win, text="Sudoku")
-	frame.grid(column=0, row=0)
-	action = ttk.Button(win, text="Solve", command=solve)
-	action.grid(column=10, row=0)
-	x=0
-	while x<3:
-		y=0
-		while y<3:
-			minFrame = ttk.LabelFrame(frame, text="")
-			minFrame.grid(column=y, row=x)
-			j=0
-			box = [[0,0,0], # a 3*3 box
-			[0,0,0],
-			[0,0,0]]
-			while j<3:
-				i=0
-				while i<3:
-					box[j][i] = tk.StringVar()
-					num_in = ttk.Entry(minFrame, width=5, textvariable=box[j][i])
-					num_in.grid(column=i,row=j)
-					i=i+1
-				j=j+1
-			nums.append(box)
-			y=y+1
-		x=x+1
-	win.mainloop()
-def getInitialValues():
-	k=[]
-	x=0
-	for i in range(9):
-		if (i==0 or i==3 or i==6):
-			for j in range(3):
-				n = []
-				for m in range(3):
-					if nums[i][j][m].get()=="":
-						n.append(0)
-					else:
-						n.append(nums[i][j][m].get())
-				k.append(n)
-		if (i==1 or i ==2):
-			for j in range(3):
-				for m in range(3):
-					if nums[i][j][m].get()=="":
-						k[j].append(0)
-					else:
-						k[j].append(nums[i][j][m].get())
-		if (i==4 or i==5):
-			for j in range(3):
-				for m in range(3):
-					if nums[i][j][m].get()=="":
-						k[j+3].append(0)
-					else:
-						k[j+3].append(nums[i][j][m].get())
-		if  (i==7 or i ==8):
-			for j in range(3):
-				for m in range(3):
-					if nums[i][j][m].get()=="":
-						k[j+6].append(0)
-					else:
-						k[j+6].append(nums[i][j][m].get())
-	return k
-
 def solve():
 	m = getInitialValues()
 	printSudoku(m)
@@ -77,7 +7,7 @@ def solve():
 		print ("No solution exists")
 
 def printSudoku(sudoku):
-    print("     Sudoku /n")
+    print("       Sudoku ")
     for i in range(len(sudoku)):
         line = ""
         if i == 3 or i == 6:
@@ -134,9 +64,18 @@ def solveSudoku(arr):
 			arr[row][col] = 0
 	return False
 
-if __name__=="__main__": 
-	createGUI()
-	# if(solveSudoku(sudoku)): 
-	# 	printSudoku(sudoku) 
-	# else: 
-	# 	print ("No solution exists")
+if __name__=="__main__":
+	# Insert sudoku rows 
+	sudoku = [[0,0,0,0,0,0,0,0,0,0],
+	[0,0,0,0,0,0,0,0,0,0],
+	[0,0,0,0,0,0,0,0,0,0],
+	[0,0,0,0,0,0,0,0,0,0],
+	[0,0,0,0,0,0,0,0,0,0],
+	[0,0,0,0,0,0,0,0,0,0],
+	[0,0,0,0,0,0,0,0,0,0],
+	[0,0,0,0,0,0,0,0,0,0],
+	[0,0,0,0,0,0,0,0,0,0]]
+	if(solveSudoku(sudoku)): 
+		printSudoku(sudoku) 
+	else: 
+		print ("No solution exists")
